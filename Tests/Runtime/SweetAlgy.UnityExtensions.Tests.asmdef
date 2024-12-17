@@ -1,0 +1,19 @@
+{
+  "name": "SweetAlgy.UnityExtensions.Tests",
+  "rootNamespace": "SweetAlgy",
+  "references": [
+    "GUID:ef8202de09410ef4d8836cd344997611"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
