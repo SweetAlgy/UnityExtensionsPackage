@@ -1,8 +1,8 @@
 # Unity Extensions
 
-A Unity package providing extension methods for `Vector2`, `Vector3`, `Vector2Int`, and `Vector3Int` structures. This
-library significantly simplifies vector manipulation in Unity by enhancing Unity's built-in vector types with concise
-and readable APIs.
+A Unity package that simplifies development by providing extension methods for various commonly used operations. These
+extensions help streamline object manipulations and configurations in a fluent and readable manner, reducing boilerplate
+code.
 
 ---
 
@@ -12,13 +12,8 @@ and readable APIs.
 2. [Why Use This Package?](#why-use-this-package)
 3. [Installation](#installation)
 4. [Usage](#usage)
-   - [Modify a Single Component](#modify-a-single-component)
-   - [Add to a Component](#add-to-a-component)
-   - [Round, Floor, or Ceil the Components](#round-floor-or-ceil-the-components)
-   - [Convert Between Types](#convert-between-types)
-   - [Clone a Vector](#clone-a-vector)
-   - [Combine Components](#combine-components)
-   - [Other Examples](#other-examples)
+   - [Vector Extensions](#vector-extensions)
+   - [Fluent Object Configuration](#fluent-object-configuration)
 5. [Integration in Your Project](#integration-in-your-project)
 6. [License](#license)
 
@@ -26,51 +21,75 @@ and readable APIs.
 
 ## Features
 
-This package provides a comprehensive set of extension methods for Unity's vector types:
-1. **Component-wise addition, subtraction, multiplication, and division**
-   Modify individual components of `Vector2`, `Vector3`, `Vector2Int`, and `Vector3Int` with simple and intuitive methods.
-2. **Cloning vectors**
-   Easily create a copy of a vector.
-3. **Update individual components**
-   Replace specific components (`x`, `y`, `z`) of a vector using methods like `WithX`, `WithY`, and `WithZ`.
-4. **Conversion methods**
-   Convert between `Vector2`, `Vector3`, `Vector2Int`, and `Vector3Int` using straightforward methods.
-5. **Rounding, flooring, and ceiling**
-   Round, floor, or ceil vector components quickly with helper methods.
-6. 
-## Why Use This Package?
-Manipulating Unity's native `Vector` types often results in verbose and repetitive code. For example, updating a single component of a `Vector3` often requires recreating the vector:
-``` c#
-// Without my Unity Extensions package
-Vector3 position = originalPosition;
-position = new Vector3(1.5f, position.y, position.z);
-```
-With this package, the same code becomes significantly easier to write and understand:
-``` c#
-// With my Unity Extensions package
-Vector3 position = originalPosition.WithX(1.5f);
-```
-The library removes common boilerplate code and makes manipulation of Unity vectors faster, more expressive, and less error-prone.
-
-## Installation
-You can install this package in Unity using the following steps:
-1. Open your Unity project.
-2. Navigate to **Window** -> **Package Manager**.
-3. Add the package manually by clicking the **+** button at the top left, selecting **Add package from git URL**, and entering:
-``` 
-   https://github.com/SweetAlgy/UnityExtensionsPackage.git
-```
-1. Alternatively, download the source and copy the `.cs` files into your Unity project (e.g., in the `Assets/Scripts` folder).
-
-That's it! You can now start using the extension methods in your scripts.
-
-## Usage
-
-All extension methods provided in this package are **immutable**, meaning they do not modify the original vector. Instead, they always create and return a **new instance** of the vector with the desired modifications. This ensures that your existing objects remain unchanged, providing a safer and more predictable programming experience.
+The package includes a variety of enhancements, including:
+1. **Vector Manipulations**
+   - Easily update vector components (`x`, `y`, `z`) using fluent syntax.
+   - Perform component-wise operations (addition, rounding, conversions, etc.).
+   - Simplify type conversions between `Vector2`, `Vector3`, `Vector2Int`, and `Vector3Int`.
+2. **Fluent Object Configuration**
+   - Configure objects with fluent, conditional, and expressive methods.
+   - Perform operations based on object states (e.g., null checks).
+   - Ensure better readability and maintainability in configuring object behavior.
 
 ---
 
-### Modify a Single Component
+## Why Use This Package?
+
+This package aims to improve productivity by reducing common patterns of boilerplate code in Unity. Whether you're manipulating Unity's `Vector` structures or working with custom objects, these extensions provide clean APIs to simplify your workflows.
+
+Without this package:
+```c#
+Vector3 position = transform.position;
+position = new Vector3(1.0f, position.y, position.z); // Verbose and error-prone
+```
+
+With this package:
+```c#
+Vector3 position = transform.position.WithX(1.0f); // Clean and expressive
+```
+
+Object configuration without this package:
+```c#
+if (myObject != null)
+{
+    if (shouldModify)
+    {
+        myObject.Property = value;
+    }
+}
+```
+
+Using Fluent Extensions:
+```c#
+myObject
+    .IfNotNull(o => o.Property = value)
+    .If(shouldModify, o => o.OtherProperty = anotherValue);
+```
+
+---
+
+## Installation
+
+**Steps to install:**
+
+1. Open your Unity project.
+2. Navigate to **Window** -> **Package Manager**.
+3. Add the package manually by selecting **Add package from git URL** and entering:
+   ```
+   https://github.com/SweetAlgy/UnityExtensionsPackage.git
+   ```
+4. Alternatively, download the source files and add them to your `Assets/Scripts/` folder.
+
+---
+
+## Usage
+
+### Vector Extensions
+
+This package enhances Unity's vector types by providing easy-to-use APIs for manipulating components, type conversion, and more.
+
+#### Modify a Single Component
+
 ```c#
 // Assume originalPosition is a Vector3 (1.0f, 2.0f, 3.0f)
 Vector3 originalPosition = new Vector3(1.0f, 2.0f, 3.0f);
@@ -83,9 +102,8 @@ Debug.Log(originalPosition); // Outputs: (1.0, 2.0, 3.0)
 Debug.Log(newPosition);      // Outputs: (10.5, 2.0, 3.0)
 ```
 
----
+#### Add to a Component
 
-### Add to a Component
 ```c#
 // Assume originalPosition is a Vector2 (2.0f, 3.0f)
 Vector2 originalPosition = new Vector2(2.0f, 3.0f);
@@ -98,9 +116,8 @@ Debug.Log(originalPosition); // Outputs: (2.0, 3.0)
 Debug.Log(newPosition);      // Outputs: (2.0, 4.0)
 ```
 
----
+#### Round, Floor, or Ceil the Components
 
-### Round, Floor, or Ceil the Components
 ```c#
 // Assume originalPosition is a Vector3 (2.7f, -1.3f, 4.5f)
 Vector3 originalPosition = new Vector3(2.7f, -1.3f, 4.5f);
@@ -121,9 +138,8 @@ Debug.Log(originalVector2);  // Outputs: (1.3, 3.8)
 Debug.Log(roundedVector);    // Outputs: (1, 4)
 ```
 
----
+#### Convert Between Types
 
-### Convert Between Types
 ```c#
 // Assume originalPosition is a Vector3 (1.0f, 2.0f, 3.0f)
 Vector3 originalPosition = new Vector3(1.0f, 2.0f, 3.0f);
@@ -144,9 +160,8 @@ Debug.Log(originalVector2);  // Outputs: (4.0, 5.0)
 Debug.Log(convertedVector2); // Outputs: (4.0, 5.0, 10.0)
 ```
 
----
+#### Clone a Vector
 
-### Clone a Vector
 ```c#
 // Assume originalPosition is a Vector3 (3.0f, 4.0f, 5.0f)
 Vector3 originalPosition = new Vector3(3.0f, 4.0f, 5.0f);
@@ -159,9 +174,8 @@ Debug.Log(originalPosition); // Outputs: (3.0, 4.0, 5.0)
 Debug.Log(copy);             // Outputs: (3.0, 4.0, 5.0)
 ```
 
----
+#### Combine Components
 
-### Combine Components
 ```c#
 // Assume originalPosition is a Vector3 (1.0f, 2.0f, 3.0f)
 Vector3 originalPosition = new Vector3(1.0f, 2.0f, 3.0f);
@@ -174,10 +188,10 @@ Debug.Log(originalPosition); // Outputs: (1.0, 2.0, 3.0)
 Debug.Log(combinedVector);   // Outputs: (2.5, 3.5, 3.0)
 ```
 
----
+#### Other Examples
 
-### Other Examples
 Change two vector components at once:
+
 ```c#
 // Assume originalVector is a Vector3 (2.0f, 3.0f, 4.0f)
 Vector3 originalVector = new Vector3(2.0f, 3.0f, 4.0f);
@@ -191,6 +205,7 @@ Debug.Log(updatedVector);    // Outputs: (2.0, 4.5, 9.5)
 ```
 
 Operate on individual components:
+
 ```c#
 // Assume originalVector is a Vector3 (1.0f, 2.0f, 3.0f)
 Vector3 originalVector = new Vector3(1.0f, 2.0f, 3.0f);
@@ -203,15 +218,58 @@ Debug.Log(originalVector);   // Outputs: (1.0, 2.0, 3.0)
 Debug.Log(scaledVector);     // Outputs: (3.5, 2.0, 3.0)
 ```
 
+### Fluent Object Configuration
+
+Make your workflows for configuring objects clean and readable with fluent extension methods. These extensions are designed to work with any type of object.
+
+#### Fluent Syntax Example
+
+```c#
+using SweetAlgy.Extensions;
+
+MyClass obj = new MyClass();
+
+// Fluent configuration
+obj.Do(o => o.Property = "Test")
+   .If(true, o => o.AnotherProperty = 42)
+   .If(() => obj.Property == "Test", o 
+       => Console.WriteLine("Property set to Test"));
+```
+    
+#### Conditional Actions
+
+Perform conditional actions with `If`:
+```c#
+SomeObject.If(isCondition, x => x.SomeConfiguration = true);
+SomeObject.If(() => SomeObject is Active, x => x.Property = newValue);
+```
+
+#### Handle Null References
+
+Perform actions based on whether an object is `null` or not:
+```c#
+MyObject
+    .IfNull(() => Debug.Log("Object is null"))
+    .IfNotNull(o => o.Property = 42);
+```
+
+#### Provide a Default Value for Nullables
+```c#
+MyObject = MyObject.WithDefault(() 
+    => new MyClass { Property = "DefaultValue" });
+```
+
 ---
 
 ## Integration in Your Project
-Once installed, you can start using the library by adding the appropriate namespace at the top of your script:
-``` c#
+
+Use the extensions after importing the package by referencing the namespace:
+```c#
 using SweetAlgy.Extensions;
 ```
-For example:
-``` c#
+
+Example usage:
+```c#
 using UnityEngine;
 using SweetAlgy.Extensions;
 
@@ -220,13 +278,18 @@ public class Example : MonoBehaviour
     void Start()
     {
         Vector3 position = transform.position
-            .WithX(10.0f)
-            .AddY(2.0f);
+            .WithX(10.0f) // Change X-coordinate
+            .AddY(2.0f);  // Increase Y-coordinate by 2
 
         Debug.Log(position);
+
+        MyObject.Do(obj => obj.Property = "Hello").IfNotNull(obj => Debug.Log(obj.Property));
     }
 }
 ```
 
+---
+
 ## License
+
 This project is licensed under the **MIT License**. See the LICENSE file for details.

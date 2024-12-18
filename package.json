@@ -1,17 +1,24 @@
 {
-    "name": "ru.sweetalgy.unity_extensions",
-    "version": "1.0.0",
-    "displayName": "Unity Extensions",
-    "description": "",
-    "unity": "2019.1",
-    "unityRelease": "0b5",
-    "keywords": [
-        "unity",
-        "extensions"
-    ],
-    "author": {
-        "name": "Sweetalgy",
-        "email": "khalt.zommer@gmail.com",
-        "url": "https://github.com/SweetAlgy"
-    }
+  "name": "ru.sweetalgy.unity_extensions",
+  "version": "1.1.0",
+  "displayName": "Unity Extensions",
+  "description": "A Unity package that simplifies development by providing extension methods for both Unity's vector types (Vector2, Vector3, Vector2Int, Vector3Int) and object configuration. Improve productivity and code readability by using fluent, conditional APIs for manipulating vectors and configuring objects.\n\nFeatures include:\n- Work with vector components (e.g., modify X, Y, Z components with ease).\n- Perform operations like rounding, flooring, converting between vector types.\n- Configure objects fluently using conditional methods like `.If`, `.IfNull`, `.IfNotNull`.\n- Reduce boilerplate code and increase clarity using expressive, immutable APIs.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "keywords": [
+    "unity",
+    "extensions",
+    "vector",
+    "builder",
+    "fluent",
+    "object"
+  ],
+  "author": {
+    "name": "Sweetalgy",
+    "email": "khalt.zommer@gmail.com",
+    "url": "https://github.com/SweetAlgy"
+  },
+  "documentationUrl": "https://github.com/SweetAlgy/UnityExtensionsPackage",
+  "license": "MIT",
+  "dependencies": {}
 }
