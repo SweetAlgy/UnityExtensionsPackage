@@ -48,7 +48,7 @@ namespace SweetAlgy.Extensions.Tests.Runtime
         public void GetDuplicatesItemsWithSelectorsTransformsDuplicates()
         {
             var items = new List<string> { "apple", "banana", "apple", "cherry", "banana" };
-            Assert.That(items.GetDuplicateItems(item => item, key => key.ToUpper()),
+            Assert.That(items.GetDuplicateItems(item => item, group => group.Key.ToUpper()),
                 Is.EquivalentTo(new List<string> { "APPLE", "BANANA" }));
         }
     }

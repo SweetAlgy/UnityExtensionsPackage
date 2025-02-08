@@ -21,11 +21,11 @@ namespace SweetAlgy.Extensions
         public static IEnumerable<TResult> GetDuplicateItems<TSource, TKey, TResult>(
             this IEnumerable<TSource> self,
             Func<TSource, TKey> keySelector,
-            Func<TKey, TResult> resultSelector)
+            Func<IGrouping<TKey,TSource>, TResult> resultSelector)
             => self
                .GroupBy(keySelector)
                .Where(group => group.Count() > 1)
-               .Select(group => resultSelector(group.Key));
+               .Select(resultSelector);
         
         public static int FindNullItems<T>(this IEnumerable<T> self)
             => self.Count(item => item is null);
